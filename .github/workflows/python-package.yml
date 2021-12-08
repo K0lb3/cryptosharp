@@ -13,7 +13,7 @@ jobs:
           "macOS-latest",
           "windows-latest"
         ]
-        python-version: "3.7"
+        python-version: ["3.7"]
         architecture: ["x86", "x64"]
     
     timeout-minutes: 30
