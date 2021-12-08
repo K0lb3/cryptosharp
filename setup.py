@@ -1,11 +1,5 @@
 import setuptools
-from os import name
-# if Windows, use normal pythonnet
-if name == 'nt':
-	requirements = ["pythonnet"]
-# else use the latest wip version from github
-else:
-    requirements = ["git", "pythonnet @ git+https://github.com/pythonnet/pythonnet.git"]
+from os import name as os_name
 
 with open("README.md", "r") as fh:
 	long_description = fh.read()
@@ -35,5 +29,7 @@ setuptools.setup(
 		"Programming Language :: Python :: 3.9",
 		"Topic :: Software Development :: Libraries :: Python Modules",
 	],
-	install_requires=requirements,
+	install_requires=[
+		"pythonnet" if os_name == 'nt' else "pythonnet @ git+https://github.com/pythonnet/pythonnet.git",
+    ],
 )
