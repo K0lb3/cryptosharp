@@ -8,7 +8,7 @@ setuptools.setup(
 	name="cryptosharp",
 	packages=['cryptosharp', 'cryptosharp.BouncyCastle', "cryptosharp.Cryptography"],#setuptools.find_packages(),
 	include_package_data = True,
-	version="0.0.1",
+	version="0.0.2",
 	author="K0lb3",
 	description="wrapper around C# cryptography libraries using pythonnet",
 	long_description=long_description,

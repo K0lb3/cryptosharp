@@ -3,8 +3,8 @@ from ._shared import load_bouncy_castle
 load_bouncy_castle()
 
 from Org.BouncyCastle.Crypto.Engines import RijndaelEngine
-from Org.BouncyCastle.Crypto.Modes import CbcBlockCipher, PaddedBlockCipher
-from Org.BouncyCastle.Crypto.Paddings import Pkcs7Padding
+from Org.BouncyCastle.Crypto.Modes import CbcBlockCipher
+from Org.BouncyCastle.Crypto.Paddings import Pkcs7Padding, PaddedBufferedBlockCipher
 from Org.BouncyCastle.Crypto.Parameters import KeyParameter, ParametersWithIV
 
 import Org.BouncyCastle.Crypto.Modes
@@ -34,11 +34,11 @@ class Rijndael:
         self.padding = padding
 
     def decrypt(self, key: bytes, iv: bytes, data: bytes) -> bytes:
-        cipher = PaddedBlockCipher(self.cipher_mode(self.engine), self.padding())
+        cipher = PaddedBufferedBlockCipher(self.cipher_mode(self.engine), self.padding())
         cipher.Init(False, ParametersWithIV(KeyParameter(key), iv))
         return bytes(cipher.DoFinal(data))
 
     def encrypt(self, key: bytes, iv: bytes, data: bytes) -> bytes:
-        cipher = PaddedBlockCipher(self.cipher_mode(self.engine), self.padding())
+        cipher = PaddedBufferedBlockCipher(self.cipher_mode(self.engine), self.padding())
         cipher.Init(True, ParametersWithIV(KeyParameter(key), iv))
         return bytes(cipher.DoFinal(data))

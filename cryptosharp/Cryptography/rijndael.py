@@ -41,12 +41,13 @@ class CipherMode(IntEnum):
 class Rijndael(object):
     def __init__(
         self,
-        rijndael: CS_Rijndael = None,
         mode: CipherMode = CipherMode.CBC,
         padding: PaddingMode = PaddingMode.PKCS7,
         key: Union[bytes, bytearray] = None,
         iv: Union[bytes, bytearray] = None,
         block_size: int = 128,
+        key_size: int = 128,
+        rijndael: CS_Rijndael = None,
     ) -> None:
         super().__init__()
         if not rijndael:
@@ -57,6 +58,9 @@ class Rijndael(object):
         self.mode = mode
         self.padding = padding
         self.block_size = block_size
+        self.key_size = key_size
+        if len(key) in [16, 24, 32]:
+            self.key_size = len(key)*8
         if key:
             self.key = key
         else:
