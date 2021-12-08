@@ -23,7 +23,7 @@ jobs:
     env:
       DEPENDENCIES: pythonnet
 
-    runs-on: ["macOS-latest", "ubuntu-latest"]
+    runs-on: [macOS-latest, ubuntu-latest]
     name: ${{ matrix.os }} ${{ matrix.architecture }} - ${{ matrix.python-version }}
     env:
       DEPENDENCIES: git git+https://github.com/pythonnet/pythonnet.git
