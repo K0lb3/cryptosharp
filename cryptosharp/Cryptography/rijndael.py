@@ -1,9 +1,3 @@
-# requirements:
-#   pythonnet
-#
-# License: MIT
-# Copyright (c) 2021, K0lb3
-
 from typing import Union
 from enum import IntEnum
 

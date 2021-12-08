@@ -1,4 +1,4 @@
-from _shared import load_bouncy_castle
+from ._shared import load_bouncy_castle
 
 load_bouncy_castle()
 
