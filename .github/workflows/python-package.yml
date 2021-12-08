@@ -18,6 +18,9 @@ jobs:
     
     timeout-minutes: 30
 
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} ${{ matrix.architecture }} - ${{ matrix.python-version }}
+
     steps:
     - uses: actions/checkout@v2
 
