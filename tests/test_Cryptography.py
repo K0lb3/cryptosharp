@@ -15,10 +15,9 @@ def test_cryptography_aes_cbc():
     cryptography_enc = cryptography_cipher.encrypt(data)
     
     assert(cryptography_enc == crypto_enc)
-    # prevent segault on macOS
-    cryptography_cipher.dispose(True)
-    # reset cryptography cipher as decrypt can't be called after encrypt
-    cryptography_cipher = Rijndael(key = key, iv = iv, mode=CipherMode.CBC, padding=PaddingMode.Zeros)
+
+    # reset crypto cipher as decrypt can't be called after encrypt
+    crypto_cipher = AES.new(key, AES.MODE_CBC, iv)
 
     crypto_dec = crypto_cipher.decrypt(crypto_enc)
     cryptography_dec = cryptography_cipher.decrypt(cryptography_enc)
