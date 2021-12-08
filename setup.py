@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
 	name="cryptosharp",
-	packages=setuptools.find_packages(),
+	packages=['cryptosharp', 'cryptosharp.BouncyCastle', "cryptosharp.Cryptography"],#setuptools.find_packages(),
 	include_package_data = True,
 	version="0.0.1",
 	author="K0lb3",
