@@ -1,4 +1,11 @@
 import setuptools
+from os import name
+# if Windows, use normal pythonnet
+if name == 'nt':
+	requirements = ["pythonnet"]
+# else use the latest wip version from github
+else:
+    requirements = ["git", "git+https://github.com/pythonnet/pythonnet.git"]
 
 with open("README.md", "r") as fh:
 	long_description = fh.read()
