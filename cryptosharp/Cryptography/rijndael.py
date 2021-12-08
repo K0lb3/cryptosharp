@@ -1,5 +1,4 @@
 from typing import Union
-from enum import IntEnum
 
 # import clr to enable C# imports via pythonnet
 import clr
@@ -20,22 +19,26 @@ from System.Security.Cryptography import (
 )
 
 
-class PaddingMode(IntEnum):
-    ANSIX923 = 4  # The ANSIX923 padding string consists of a sequence of bytes filled with zeros before the length.
+class PaddingMode:
+    ANSIX923 = (
+        CS_PaddingMode.ANSIX923
+    )  # The ANSIX923 padding string consists of a sequence of bytes filled with zeros before the length.
     ISO10126 = (
-        5  # The ISO10126 padding string consists of random data before the length.
-    )
-    NONE = 1  # No padding is done.
-    PKCS7 = 2  # The PKCS #7 padding string consists of a sequence of bytes, each of which is equal to the total number of padding bytes added.
-    Zeros = 3  # The padding string consists of bytes set to zero.
+        CS_PaddingMode.ISO10126
+    )  # The ISO10126 padding string consists of random data before the length.
+    NONE = getattr(CS_PaddingMode, "None")  # No padding is done.
+    PKCS7 = (
+        CS_PaddingMode.PKCS7
+    )  # The PKCS #7 padding string consists of a sequence of bytes, each of which is equal to the total number of padding bytes added.
+    Zeros = CS_PaddingMode.Zeros  # The padding string consists of bytes set to zero.
 
 
-class CipherMode(IntEnum):
-    CBC = 1
-    CFB = 4
-    CTS = 5
-    ECB = 2
-    OFB = 3
+class CipherMode:
+    CBC = CS_CipherMode.CBC  # Cipher block chaining.
+    CFB = CS_CipherMode.CFB  # Cipher feedback.
+    CTS = CS_CipherMode.CTS  # Cipher text stealing.
+    ECB = CS_CipherMode.ECB  # Electronic codebook.
+    OFB = CS_CipherMode.OFB  # Output feedback.
 
 
 class Rijndael(object):
@@ -60,7 +63,7 @@ class Rijndael(object):
         self.block_size = block_size
         self.key_size = key_size
         if len(key) in [16, 24, 32]:
-            self.key_size = len(key)*8
+            self.key_size = len(key) * 8
         if key:
             self.key = key
         else:
@@ -143,22 +146,22 @@ class Rijndael(object):
     @property
     def mode(self) -> CipherMode:
         """Gets or sets the mode for operation of the symmetric algorithm."""
-        return CipherMode(self.myRijndael.Mode)
+        return self.myRijndael.Mode
 
     @mode.setter
-    def mode(self, value: Union[int, CipherMode]):
+    def mode(self, value: CipherMode):
         """Gets or sets the mode for operation of the symmetric algorithm."""
-        self.myRijndael.Mode = CS_CipherMode(value)
+        self.myRijndael.Mode = value
 
     @property
     def padding(self) -> PaddingMode:
         """Gets or sets the padding mode used in the symmetric algorithm."""
-        return PaddingMode(self.myRijndael.padding)
+        return self.myRijndael.padding
 
     @padding.setter
-    def padding(self, value: Union[int, PaddingMode]):
+    def padding(self, value: PaddingMode):
         """Gets or sets the padding mode used in the symmetric algorithm."""
-        self.myRijndael.Padding = CS_PaddingMode(value)
+        self.myRijndael.Padding = value
 
     def clear(self):
         """Releases all resources used by the SymmetricAlgorithm class."""
