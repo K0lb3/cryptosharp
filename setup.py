@@ -35,7 +35,5 @@ setuptools.setup(
 		"Programming Language :: Python :: 3.9",
 		"Topic :: Software Development :: Libraries :: Python Modules",
 	],
-	install_requires=[
-		"pythonnet"
-	]
+	install_requires=requirements,
 )
