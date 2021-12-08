@@ -24,7 +24,7 @@ jobs:
     env:
       DEPENDENCIES: pythonnet
 
-    runs-on: ${{matrix.os}}
+    runs-on: ${{ matrix.os }}
     if: runner.os != 'Windows'
     name: ${{ matrix.os }} ${{ matrix.architecture }} - ${{ matrix.python-version }}
     env:
