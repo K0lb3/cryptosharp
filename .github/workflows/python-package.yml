@@ -38,12 +38,12 @@ jobs:
     - name: Install pythonnet (Windows)
       if: runner.os == 'Windows'
       run: |
-        python install pythonnet
+        pip install pythonnet
     
     - name: Install pythonnet (Linux, MacOS)
       if: runner.os != 'Windows'
       run: |
-        python install git+git+https://github.com/pythonnet/pythonnet.git
+        pip install git+git+https://github.com/pythonnet/pythonnet.git
     
     - name: Install module
       run: |
